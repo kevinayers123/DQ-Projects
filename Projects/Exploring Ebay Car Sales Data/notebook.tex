@@ -1,0 +1,1788 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Exploring Ebay Car Sales Data}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    The aim of this project is to clean in analyze 50,000 data points that
+have been scraped from EBay's used car listings. Working as a data
+analyst for large online used car dealership the goal is to enable
+buyers to make informed decisions while purchasing sales merchandise. As
+well as assist sales and development teams through the process of
+curating the website layout and sales prices.
+
+    \section{Opening and Exploring the
+Data}\label{opening-and-exploring-the-data}
+
+    In November of 2016, data was scraped on over 370000 cars with Scrapy
+from the Ebay-Kleinanzeigan website. For our purposes analysis will be
+done on a subset of 50,000 data points.
+
+    \begin{itemize}
+\tightlist
+\item
+  \href{https://www.kaggle.com/orgesleka/used-cars-database/data}{Ebay-Keinaseigan
+  Data Set}
+\end{itemize}
+
+    A data dictionary provided with the dataset provides the following
+information:
+
+    \begin{itemize}
+\tightlist
+\item
+  \textbf{dateCrawled} - When this ad was first crawled. All
+  field-values are taken from this date.
+\item
+  \textbf{name} - Name of the Car.
+\item
+  \textbf{seller} - Whether the seller is private or a dealer.
+\item
+  \textbf{offerType} - The type of listing.
+\item
+  \textbf{price} - The price on the ad to sell the car.
+\item
+  \textbf{abtest} - Whether the listing is included in an A/B test.
+\item
+  \textbf{vehicleType} - The vehicle Type.
+\item
+  \textbf{yearOfRegistration} - The year in which the car was first
+  registered.
+\item
+  \textbf{gearbox} - The transmissoin type.
+\item
+  \textbf{powerPS} - The poser of the car in PS.
+\item
+  \textbf{model} - The car model name.
+\item
+  \textbf{kilometer} - How many kilometers the car has driven.
+\item
+  \textbf{monthOfRegistration} - The month in which the car was first
+  registered.
+\item
+  \textbf{fuelType} - What type of fuel the car uses.
+\item
+  \textbf{brand} - The brand of the car.
+\item
+  \textbf{notRepairedDamage} - If the car has a damage which is not yet
+  repaired.
+\item
+  \textbf{dateCreated} - The date on which the eBay listing was created.
+\item
+  \textbf{nrOfPictures} - The postal code for the location of the
+  vehicle.
+\item
+  \textbf{lastSeenOnline} - When the crawler saw this ad last online.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{autos} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{autos.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{encoding} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Latin\PYZhy{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{autos}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}            dateCrawled                                               name  \textbackslash{}
+        0  2016-03-26 17:47:46                   Peugeot\_807\_160\_NAVTECH\_ON\_BOARD   
+        1  2016-04-04 13:38:56         BMW\_740i\_4\_4\_Liter\_HAMANN\_UMBAU\_Mega\_Optik   
+        2  2016-03-26 18:57:24                         Volkswagen\_Golf\_1.6\_United   
+        3  2016-03-12 16:58:10  Smart\_smart\_fortwo\_coupe\_softouch/F1/Klima/Pan{\ldots}   
+        4  2016-04-01 14:38:50  Ford\_Focus\_1\_6\_Benzin\_TÜV\_neu\_ist\_sehr\_gepfleg{\ldots}   
+        
+           seller offerType   price   abtest vehicleType  yearOfRegistration  \textbackslash{}
+        0  privat   Angebot  \$5,000  control         bus                2004   
+        1  privat   Angebot  \$8,500  control   limousine                1997   
+        2  privat   Angebot  \$8,990     test   limousine                2009   
+        3  privat   Angebot  \$4,350  control  kleinwagen                2007   
+        4  privat   Angebot  \$1,350     test       kombi                2003   
+        
+             gearbox  powerPS   model   odometer  monthOfRegistration fuelType  \textbackslash{}
+        0    manuell      158  andere  150,000km                    3      lpg   
+        1  automatik      286     7er  150,000km                    6   benzin   
+        2    manuell      102    golf   70,000km                    7   benzin   
+        3  automatik       71  fortwo   70,000km                    6   benzin   
+        4    manuell        0   focus  150,000km                    7   benzin   
+        
+                brand notRepairedDamage          dateCreated  nrOfPictures  \textbackslash{}
+        0     peugeot              nein  2016-03-26 00:00:00             0   
+        1         bmw              nein  2016-04-04 00:00:00             0   
+        2  volkswagen              nein  2016-03-26 00:00:00             0   
+        3       smart              nein  2016-03-12 00:00:00             0   
+        4        ford              nein  2016-04-01 00:00:00             0   
+        
+           postalCode             lastSeen  
+        0       79588  2016-04-06 06:45:54  
+        1       71034  2016-04-06 14:45:08  
+        2       35394  2016-04-06 20:15:37  
+        3       33729  2016-03-15 03:16:28  
+        4       39218  2016-04-01 14:38:50  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{autos}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 50000 entries, 0 to 49999
+Data columns (total 20 columns):
+dateCrawled            50000 non-null object
+name                   50000 non-null object
+seller                 50000 non-null object
+offerType              50000 non-null object
+price                  50000 non-null object
+abtest                 50000 non-null object
+vehicleType            44905 non-null object
+yearOfRegistration     50000 non-null int64
+gearbox                47320 non-null object
+powerPS                50000 non-null int64
+model                  47242 non-null object
+odometer               50000 non-null object
+monthOfRegistration    50000 non-null int64
+fuelType               45518 non-null object
+brand                  50000 non-null object
+notRepairedDamage      40171 non-null object
+dateCreated            50000 non-null object
+nrOfPictures           50000 non-null int64
+postalCode             50000 non-null int64
+lastSeen               50000 non-null object
+dtypes: int64(5), object(15)
+memory usage: 7.6+ MB
+
+    \end{Verbatim}
+
+    We can see that the dataset contains 20 columns, most of which are
+strings. Some columns have null values, but none have more that
+\textasciitilde{}20\% null values.
+
+    \section{Cleaning Wrong Data}\label{cleaning-wrong-data}
+
+    \subsubsection{Cleaning Column Names}\label{cleaning-column-names}
+
+    The column names use camelcase instead of Python's preferred snakecase.
+We will convert the column names from camelcase to snakecase and reword
+some of the column names based on the data dictionary to be more
+descriptive.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{autos}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} Index(['dateCrawled', 'name', 'seller', 'offerType', 'price', 'abtest',
+               'vehicleType', 'yearOfRegistration', 'gearbox', 'powerPS', 'model',
+               'odometer', 'monthOfRegistration', 'fuelType', 'brand',
+               'notRepairedDamage', 'dateCreated', 'nrOfPictures', 'postalCode',
+               'lastSeen'],
+              dtype='object')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{autos}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date\PYZus{}crawled}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{seller}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{offer\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abtest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vehicle\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{registration\PYZus{}year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gearbox}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{power\PYZus{}ps}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{odometer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{registration\PYZus{}month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fuel\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{brand}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{unrepaired\PYZus{}damage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ad\PYZus{}created}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nr\PYZus{}of\PYZus{}pictures}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{postal\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{last\PYZus{}seen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{autos}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:}           date\_crawled                                               name  \textbackslash{}
+        0  2016-03-26 17:47:46                   Peugeot\_807\_160\_NAVTECH\_ON\_BOARD   
+        1  2016-04-04 13:38:56         BMW\_740i\_4\_4\_Liter\_HAMANN\_UMBAU\_Mega\_Optik   
+        2  2016-03-26 18:57:24                         Volkswagen\_Golf\_1.6\_United   
+        3  2016-03-12 16:58:10  Smart\_smart\_fortwo\_coupe\_softouch/F1/Klima/Pan{\ldots}   
+        4  2016-04-01 14:38:50  Ford\_Focus\_1\_6\_Benzin\_TÜV\_neu\_ist\_sehr\_gepfleg{\ldots}   
+        
+           seller offer\_type   price   abtest vehicle\_type  registration\_year  \textbackslash{}
+        0  privat    Angebot  \$5,000  control          bus               2004   
+        1  privat    Angebot  \$8,500  control    limousine               1997   
+        2  privat    Angebot  \$8,990     test    limousine               2009   
+        3  privat    Angebot  \$4,350  control   kleinwagen               2007   
+        4  privat    Angebot  \$1,350     test        kombi               2003   
+        
+             gearbox  power\_ps   model   odometer  registration\_month fuel\_type  \textbackslash{}
+        0    manuell       158  andere  150,000km                   3       lpg   
+        1  automatik       286     7er  150,000km                   6    benzin   
+        2    manuell       102    golf   70,000km                   7    benzin   
+        3  automatik        71  fortwo   70,000km                   6    benzin   
+        4    manuell         0   focus  150,000km                   7    benzin   
+        
+                brand unrepaired\_damage           ad\_created  nr\_of\_pictures  \textbackslash{}
+        0     peugeot              nein  2016-03-26 00:00:00               0   
+        1         bmw              nein  2016-04-04 00:00:00               0   
+        2  volkswagen              nein  2016-03-26 00:00:00               0   
+        3       smart              nein  2016-03-12 00:00:00               0   
+        4        ford              nein  2016-04-01 00:00:00               0   
+        
+           postal\_code            last\_seen  
+        0        79588  2016-04-06 06:45:54  
+        1        71034  2016-04-06 14:45:08  
+        2        35394  2016-04-06 20:15:37  
+        3        33729  2016-03-15 03:16:28  
+        4        39218  2016-04-01 14:38:50  
+\end{Verbatim}
+            
+    Changes made include:
+
+\begin{itemize}
+\tightlist
+\item
+  yearOfRegistration to registration\_year
+\item
+  monthOfRegistration to registration\_month
+\item
+  notRepairedDamage to unrepaired\_damage
+\item
+  dateCreated to ad\_created
+\end{itemize}
+
+    \subsubsection{Intial Exploration}\label{intial-exploration}
+
+    An initial data exploration to determine what other cleaning tasks need
+to be done.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{autos}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{n}{include}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{all}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:}                date\_crawled         name  seller offer\_type  price abtest  \textbackslash{}
+        count                 50000        50000   50000      50000  50000  50000   
+        unique                48213        38754       2          2   2357      2   
+        top     2016-03-23 19:38:20  Ford\_Fiesta  privat    Angebot     \$0   test   
+        freq                      3           78   49999      49999   1421  25756   
+        mean                    NaN          NaN     NaN        NaN    NaN    NaN   
+        std                     NaN          NaN     NaN        NaN    NaN    NaN   
+        min                     NaN          NaN     NaN        NaN    NaN    NaN   
+        25\%                     NaN          NaN     NaN        NaN    NaN    NaN   
+        50\%                     NaN          NaN     NaN        NaN    NaN    NaN   
+        75\%                     NaN          NaN     NaN        NaN    NaN    NaN   
+        max                     NaN          NaN     NaN        NaN    NaN    NaN   
+        
+               vehicle\_type  registration\_year  gearbox      power\_ps  model  \textbackslash{}
+        count         44905       50000.000000    47320  50000.000000  47242   
+        unique            8                NaN        2           NaN    245   
+        top       limousine                NaN  manuell           NaN   golf   
+        freq          12859                NaN    36993           NaN   4024   
+        mean            NaN        2005.073280      NaN    116.355920    NaN   
+        std             NaN         105.712813      NaN    209.216627    NaN   
+        min             NaN        1000.000000      NaN      0.000000    NaN   
+        25\%             NaN        1999.000000      NaN     70.000000    NaN   
+        50\%             NaN        2003.000000      NaN    105.000000    NaN   
+        75\%             NaN        2008.000000      NaN    150.000000    NaN   
+        max             NaN        9999.000000      NaN  17700.000000    NaN   
+        
+                 odometer  registration\_month fuel\_type       brand unrepaired\_damage  \textbackslash{}
+        count       50000        50000.000000     45518       50000             40171   
+        unique         13                 NaN         7          40                 2   
+        top     150,000km                 NaN    benzin  volkswagen              nein   
+        freq        32424                 NaN     30107       10687             35232   
+        mean          NaN            5.723360       NaN         NaN               NaN   
+        std           NaN            3.711984       NaN         NaN               NaN   
+        min           NaN            0.000000       NaN         NaN               NaN   
+        25\%           NaN            3.000000       NaN         NaN               NaN   
+        50\%           NaN            6.000000       NaN         NaN               NaN   
+        75\%           NaN            9.000000       NaN         NaN               NaN   
+        max           NaN           12.000000       NaN         NaN               NaN   
+        
+                         ad\_created  nr\_of\_pictures   postal\_code            last\_seen  
+        count                 50000         50000.0  50000.000000                50000  
+        unique                   76             NaN           NaN                39481  
+        top     2016-04-03 00:00:00             NaN           NaN  2016-04-07 06:17:27  
+        freq                   1946             NaN           NaN                    8  
+        mean                    NaN             0.0  50813.627300                  NaN  
+        std                     NaN             0.0  25779.747957                  NaN  
+        min                     NaN             0.0   1067.000000                  NaN  
+        25\%                     NaN             0.0  30451.000000                  NaN  
+        50\%                     NaN             0.0  49577.000000                  NaN  
+        75\%                     NaN             0.0  71540.000000                  NaN  
+        max                     NaN             0.0  99998.000000                  NaN  
+\end{Verbatim}
+            
+    The \texttt{abtest} column provides information related to an A/B test
+done by EBay. We do not have the result data for this test. The column
+will be removed because it doesn't have any useful information for our
+purposes.
+
+Also the \texttt{seller} and \texttt{offer\_type} columns only have two
+unique values. These columns can be removed given they will not provide
+usefull infromation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{autos}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abtest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{autos}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{seller}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{offer\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{inplace}\PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{autos}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:}           date\_crawled                                               name  \textbackslash{}
+         0  2016-03-26 17:47:46                   Peugeot\_807\_160\_NAVTECH\_ON\_BOARD   
+         1  2016-04-04 13:38:56         BMW\_740i\_4\_4\_Liter\_HAMANN\_UMBAU\_Mega\_Optik   
+         2  2016-03-26 18:57:24                         Volkswagen\_Golf\_1.6\_United   
+         3  2016-03-12 16:58:10  Smart\_smart\_fortwo\_coupe\_softouch/F1/Klima/Pan{\ldots}   
+         4  2016-04-01 14:38:50  Ford\_Focus\_1\_6\_Benzin\_TÜV\_neu\_ist\_sehr\_gepfleg{\ldots}   
+         
+             price vehicle\_type  registration\_year    gearbox  power\_ps   model  \textbackslash{}
+         0  \$5,000          bus               2004    manuell       158  andere   
+         1  \$8,500    limousine               1997  automatik       286     7er   
+         2  \$8,990    limousine               2009    manuell       102    golf   
+         3  \$4,350   kleinwagen               2007  automatik        71  fortwo   
+         4  \$1,350        kombi               2003    manuell         0   focus   
+         
+             odometer  registration\_month fuel\_type       brand unrepaired\_damage  \textbackslash{}
+         0  150,000km                   3       lpg     peugeot              nein   
+         1  150,000km                   6    benzin         bmw              nein   
+         2   70,000km                   7    benzin  volkswagen              nein   
+         3   70,000km                   6    benzin       smart              nein   
+         4  150,000km                   7    benzin        ford              nein   
+         
+                     ad\_created  nr\_of\_pictures  postal\_code            last\_seen  
+         0  2016-03-26 00:00:00               0        79588  2016-04-06 06:45:54  
+         1  2016-04-04 00:00:00               0        71034  2016-04-06 14:45:08  
+         2  2016-03-26 00:00:00               0        35394  2016-04-06 20:15:37  
+         3  2016-03-12 00:00:00               0        33729  2016-03-15 03:16:28  
+         4  2016-04-01 00:00:00               0        39218  2016-04-01 14:38:50  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fuel\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} benzin     30107
+         diesel     14567
+         lpg          691
+         cng           75
+         hybrid        37
+         andere        22
+         elektro       19
+         Name: fuel\_type, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vehicle\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} limousine     12859
+         kleinwagen    10822
+         kombi          9127
+         bus            4093
+         cabrio         3061
+         coupe          2537
+         suv            1986
+         andere          420
+         Name: vehicle\_type, dtype: int64
+\end{Verbatim}
+            
+    Some text columns contain data that is in German and may need to be
+translated to english to fully analyze the dataset.
+
+    The \texttt{price} and \texttt{odometer} columns are numeric values
+stored as text. For each column we will:
+
+    \begin{itemize}
+\tightlist
+\item
+  Remove any non\_numeric characters.
+\item
+  Convert the column to a numeric datatype.
+\item
+  Use \texttt{Dataframe.rename()} the \texttt{odometer} column to
+  \texttt{odometer\_km}
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} 0    \$5,000
+         1    \$8,500
+         2    \$8,990
+         3    \$4,350
+         4    \$1,350
+         Name: price, dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} 0    5,000
+         1    8,500
+         2    8,990
+         3    4,350
+         4    1,350
+         Name: price, dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} 0    5000.0
+         1    8500.0
+         2    8990.0
+         3    4350.0
+         4    1350.0
+         Name: price, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{autos}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{odometer}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{odometer\PYZus{}km}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{odometer\PYZus{}km}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} 0    150,000km
+         1    150,000km
+         2     70,000km
+         3     70,000km
+         4    150,000km
+         Name: odometer\_km, dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{odometer\PYZus{}km}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{odometer\PYZus{}km}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}} \PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{odometer\PYZus{}km}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} 0    150000km
+         1    150000km
+         2     70000km
+         3     70000km
+         4    150000km
+         Name: odometer\_km, dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{odometer\PYZus{}km}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{odometer\PYZus{}km}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{km}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{odometer\PYZus{}km}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} 0    150000.0
+         1    150000.0
+         2     70000.0
+         3     70000.0
+         4    150000.0
+         Name: odometer\_km, dtype: float64
+\end{Verbatim}
+            
+    \subsubsection{Exploring the Odometer and Price
+Columns}\label{exploring-the-odometer-and-price-columns}
+
+    We'll continue exploring the the data, specifically looking for data
+that doesn't look right. We'll start by analyzing the
+\texttt{odometer\_km} and \texttt{price} colums by:
+
+    \begin{itemize}
+\tightlist
+\item
+  Analyzing the columns using minimum and maximum values and look for
+  any values that look unrealistically high or low (outliers) that we
+  might want to remove.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{odometer\PYZus{}km}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} 0    150000.0
+         1    150000.0
+         2     70000.0
+         3     70000.0
+         4    150000.0
+         Name: odometer\_km, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{odometer\PYZus{}km}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} 150000.0    32424
+         125000.0     5170
+         100000.0     2169
+         90000.0      1757
+         80000.0      1436
+         70000.0      1230
+         60000.0      1164
+         50000.0      1027
+         5000.0        967
+         40000.0       819
+         30000.0       789
+         20000.0       784
+         10000.0       264
+         Name: odometer\_km, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{odometer\PYZus{}km}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} count     50000.000000
+         mean     125732.700000
+         std       40042.211706
+         min        5000.000000
+         25\%      125000.000000
+         50\%      150000.000000
+         75\%      150000.000000
+         max      150000.000000
+         Name: odometer\_km, dtype: float64
+\end{Verbatim}
+            
+    There doesn't seem to be any obvious outliers of data in the odometer
+column. However the kilometers seem to be recored as averages or
+classes. 32 thousand vehicles are recorded as having 150,000. This could
+mean they all had close to or more than 150,000 kilometers.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} 0    5000.0
+         1    8500.0
+         2    8990.0
+         3    4350.0
+         4    1350.0
+         Name: price, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} 0.0           1421
+         500.0          781
+         1500.0         734
+         2500.0         643
+         1200.0         639
+         1000.0         639
+         600.0          531
+         800.0          498
+         3500.0         498
+         2000.0         460
+         999.0          434
+         750.0          433
+         900.0          420
+         650.0          419
+         850.0          410
+         700.0          395
+         4500.0         394
+         300.0          384
+         2200.0         382
+         950.0          379
+         1100.0         376
+         1300.0         371
+         3000.0         365
+         550.0          356
+         1800.0         355
+         5500.0         340
+         1250.0         335
+         350.0          335
+         1600.0         327
+         1999.0         322
+                       {\ldots} 
+         2225.0           1
+         69997.0          1
+         139997.0         1
+         69999.0          1
+         4780.0           1
+         8930.0           1
+         21599.0          1
+         15911.0          1
+         10000000.0       1
+         5180.0           1
+         919.0            1
+         1247.0           1
+         5998.0           1
+         27020.0          1
+         21888.0          1
+         46500.0          1
+         2001.0           1
+         2459.0           1
+         345000.0         1
+         34940.0          1
+         2785.0           1
+         5248.0           1
+         310.0            1
+         3129.0           1
+         69900.0          1
+         6202.0           1
+         18310.0          1
+         898.0            1
+         11240.0          1
+         789.0            1
+         Name: price, Length: 2357, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:} count    5.000000e+04
+         mean     9.840044e+03
+         std      4.811044e+05
+         min      0.000000e+00
+         25\%      1.100000e+03
+         50\%      2.950000e+03
+         75\%      7.200000e+03
+         max      1.000000e+08
+         Name: price, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}index}\PY{p}{(}\PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:} 99999999.0       1
+         27322222.0       1
+         12345678.0       3
+         11111111.0       2
+         10000000.0       1
+         3890000.0        1
+         1300000.0        1
+         1234566.0        1
+         999999.0         2
+         999990.0         1
+         350000.0         1
+         345000.0         1
+         299000.0         1
+         295000.0         1
+         265000.0         1
+         259000.0         1
+         250000.0         1
+         220000.0         1
+         198000.0         1
+         197000.0         1
+         194000.0         1
+         190000.0         1
+         180000.0         1
+         175000.0         1
+         169999.0         1
+         169000.0         1
+         163991.0         1
+         163500.0         1
+         155000.0         1
+         151990.0         1
+                       {\ldots} 
+         66.0             1
+         65.0             5
+         60.0             9
+         59.0             1
+         55.0             2
+         50.0            49
+         49.0             4
+         47.0             1
+         45.0             4
+         40.0             6
+         35.0             1
+         30.0             7
+         29.0             1
+         25.0             5
+         20.0             4
+         18.0             1
+         17.0             3
+         15.0             2
+         14.0             1
+         13.0             2
+         12.0             3
+         11.0             2
+         10.0             7
+         9.0              1
+         8.0              1
+         5.0              2
+         3.0              1
+         2.0              3
+         1.0            156
+         0.0           1421
+         Name: price, Length: 2357, dtype: int64
+\end{Verbatim}
+            
+    After exploring the price column its clear some data points look to be
+outliers. There are several data points that are well over a million
+dollars. The used car dealership company the we work for does not sell
+exotic vehicles.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}index}\PY{p}{(}\PY{n}{ascending} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:} 0.0           1421
+         1.0            156
+         2.0              3
+         3.0              1
+         5.0              2
+         8.0              1
+         9.0              1
+         10.0             7
+         11.0             2
+         12.0             3
+         13.0             2
+         14.0             1
+         15.0             2
+         17.0             3
+         18.0             1
+         20.0             4
+         25.0             5
+         29.0             1
+         30.0             7
+         35.0             1
+         40.0             6
+         45.0             4
+         47.0             1
+         49.0             4
+         50.0            49
+         55.0             2
+         59.0             1
+         60.0             9
+         65.0             5
+         66.0             1
+                       {\ldots} 
+         151990.0         1
+         155000.0         1
+         163500.0         1
+         163991.0         1
+         169000.0         1
+         169999.0         1
+         175000.0         1
+         180000.0         1
+         190000.0         1
+         194000.0         1
+         197000.0         1
+         198000.0         1
+         220000.0         1
+         250000.0         1
+         259000.0         1
+         265000.0         1
+         295000.0         1
+         299000.0         1
+         345000.0         1
+         350000.0         1
+         999990.0         1
+         999999.0         2
+         1234566.0        1
+         1300000.0        1
+         3890000.0        1
+         10000000.0       1
+         11111111.0       2
+         12345678.0       3
+         27322222.0       1
+         99999999.0       1
+         Name: price, Length: 2357, dtype: int64
+\end{Verbatim}
+            
+    The price column also contains several data points for vehicles that are
+priced below 1,000, including 1,500 cars that are priced at 0.0. After
+consulting with the sales and development teams it has been decided that
+the cars that are of interest to the company fall between the 1,000 and
+90,000 dollars. The data on all other vehicles will need to be removed.
+
+    To remove outlier data we will:
+
+    \begin{itemize}
+\tightlist
+\item
+  Use pandas boolean indexing to filter the dataset
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{outlier\PYZus{}filter} \PY{o}{=} \PY{p}{(}\PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mf}{90000.0}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{1000.0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{autos} \PY{o}{=} \PY{n}{autos}\PY{p}{[}\PY{n}{outlier\PYZus{}filter}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:} 1000.0    639
+         1039.0      1
+         1040.0      1
+         1049.0      6
+         1050.0     95
+         Name: price, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:} 85000.0    1
+         86500.0    1
+         88900.0    1
+         89000.0    1
+         89900.0    1
+         Name: price, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:} count    38578.000000
+         mean      7068.116232
+         std       7774.758925
+         min       1000.000000
+         25\%       2200.000000
+         50\%       4300.000000
+         75\%       8940.500000
+         max      89900.000000
+         Name: price, dtype: float64
+\end{Verbatim}
+            
+    With outliers removed we now how a clear picture of the price data:
+
+    \begin{itemize}
+\tightlist
+\item
+  Average price of cars sold: \$7,159
+\end{itemize}
+
+    \begin{itemize}
+\tightlist
+\item
+  75\% of the cars sold for an average of: \$9,000
+\end{itemize}
+
+    \begin{itemize}
+\tightlist
+\item
+  50\% of the cars sold for an average of \$4,500
+\end{itemize}
+
+    \begin{itemize}
+\tightlist
+\item
+  25\% of the cars sold for an average of \$2,500
+\end{itemize}
+
+    The company can use this information to direct purchasing strategies.
+With possible target merchandise being in the in the range of 2,000 to
+6,000 range and a sales price listing increase of \$2,000.
+
+    \section{Exploring Date Information}\label{exploring-date-information}
+
+    There are 5 columns that should represent date values. Some of these
+columns were created by the crawler, some came from the website itself.
+We can differentiate by referring to the data dictionary:
+
+    \begin{itemize}
+\tightlist
+\item
+  \texttt{date\_crawled}: added by the crawler
+\item
+  \texttt{last\_seen}: added by the crawler
+\item
+  \texttt{ad\_created}: from the website
+\item
+  \texttt{registration\_month}: from the website
+\item
+  \texttt{registration\_year}: from the website
+\end{itemize}
+
+    Right now, the \texttt{date\_crawled}, \texttt{last\_seen}, and
+\texttt{ad\_created} columns are all identified as string values by
+pandas. Because the three columns are represented as strings, we will
+convert the data into numerical representation so we can understand it
+quantitatively.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{autos}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date\PYZus{}crawled}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ad\PYZus{}created}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{last\PYZus{}seen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:}           date\_crawled           ad\_created            last\_seen
+         0  2016-03-26 17:47:46  2016-03-26 00:00:00  2016-04-06 06:45:54
+         1  2016-04-04 13:38:56  2016-04-04 00:00:00  2016-04-06 14:45:08
+         2  2016-03-26 18:57:24  2016-03-26 00:00:00  2016-04-06 20:15:37
+         3  2016-03-12 16:58:10  2016-03-12 00:00:00  2016-03-15 03:16:28
+         4  2016-04-01 14:38:50  2016-04-01 00:00:00  2016-04-01 14:38:50
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date\PYZus{}crawled}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{n}{normalize} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,}\PY{n}{dropna} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}index}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} 2016-03-05    0.025533
+         2016-03-06    0.013868
+         2016-03-07    0.035175
+         2016-03-08    0.032609
+         2016-03-09    0.032480
+         2016-03-10    0.033361
+         2016-03-11    0.032843
+         2016-03-12    0.037405
+         2016-03-13    0.016019
+         2016-03-14    0.036653
+         2016-03-15    0.033594
+         2016-03-16    0.029084
+         2016-03-17    0.030484
+         2016-03-18    0.012779
+         2016-03-19    0.035175
+         2016-03-20    0.038182
+         2016-03-21    0.037249
+         2016-03-22    0.032428
+         2016-03-23    0.032220
+         2016-03-24    0.029032
+         2016-03-25    0.030510
+         2016-03-26    0.033102
+         2016-03-27    0.031365
+         2016-03-28    0.035357
+         2016-03-29    0.034009
+         2016-03-30    0.033024
+         2016-03-31    0.031417
+         2016-04-01    0.034553
+         2016-04-02    0.036342
+         2016-04-03    0.039141
+         2016-04-04    0.036886
+         2016-04-05    0.013350
+         2016-04-06    0.003266
+         2016-04-07    0.001503
+         Name: date\_crawled, dtype: float64
+\end{Verbatim}
+            
+    Exploring the \texttt{date\_crawled} column shows that the data
+collection was completed evenly over a month long interval from
+03/05/16-04/07/16
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ad\PYZus{}created}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{n}{normalize} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,}  \PY{n}{dropna} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}index}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:} 2015-06-11    0.000026
+         2015-08-10    0.000026
+         2015-09-09    0.000026
+         2015-11-10    0.000026
+         2015-12-30    0.000026
+         2016-01-03    0.000026
+         2016-01-07    0.000026
+         2016-01-10    0.000052
+         2016-01-13    0.000026
+         2016-01-14    0.000026
+         2016-01-16    0.000026
+         2016-01-22    0.000026
+         2016-01-27    0.000078
+         2016-01-29    0.000026
+         2016-02-01    0.000026
+         2016-02-02    0.000052
+         2016-02-05    0.000052
+         2016-02-07    0.000026
+         2016-02-09    0.000026
+         2016-02-11    0.000026
+         2016-02-12    0.000052
+         2016-02-14    0.000052
+         2016-02-16    0.000026
+         2016-02-17    0.000026
+         2016-02-18    0.000052
+         2016-02-19    0.000078
+         2016-02-20    0.000026
+         2016-02-21    0.000052
+         2016-02-22    0.000026
+         2016-02-23    0.000104
+                         {\ldots}   
+         2016-03-09    0.032687
+         2016-03-10    0.033024
+         2016-03-11    0.033102
+         2016-03-12    0.037146
+         2016-03-13    0.017678
+         2016-03-14    0.034994
+         2016-03-15    0.033413
+         2016-03-16    0.029654
+         2016-03-17    0.030147
+         2016-03-18    0.013246
+         2016-03-19    0.034113
+         2016-03-20    0.038286
+         2016-03-21    0.037534
+         2016-03-22    0.032220
+         2016-03-23    0.031961
+         2016-03-24    0.029032
+         2016-03-25    0.030665
+         2016-03-26    0.033205
+         2016-03-27    0.031235
+         2016-03-28    0.035383
+         2016-03-29    0.033983
+         2016-03-30    0.032894
+         2016-03-31    0.031572
+         2016-04-01    0.034398
+         2016-04-02    0.036005
+         2016-04-03    0.039453
+         2016-04-04    0.037301
+         2016-04-05    0.011976
+         2016-04-06    0.003370
+         2016-04-07    0.001322
+         Name: ad\_created, Length: 74, dtype: float64
+\end{Verbatim}
+            
+    Analysis of the \texttt{ad\_created} column shows that the majority of
+the advertisements were creating during the month of march with only a
+small percentage of the ads being more than a month old.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{last\PYZus{}seen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{n}{normalize} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,}  \PY{n}{dropna} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}index}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}41}]:} 2016-03-05    0.001089
+         2016-03-06    0.003577
+         2016-03-07    0.004562
+         2016-03-08    0.006247
+         2016-03-09    0.008891
+         2016-03-10    0.009824
+         2016-03-11    0.011742
+         2016-03-12    0.022215
+         2016-03-13    0.008399
+         2016-03-14    0.012002
+         2016-03-15    0.015009
+         2016-03-16    0.015449
+         2016-03-17    0.026414
+         2016-03-18    0.007362
+         2016-03-19    0.014620
+         2016-03-20    0.019804
+         2016-03-21    0.019674
+         2016-03-22    0.020815
+         2016-03-23    0.017886
+         2016-03-24    0.018508
+         2016-03-25    0.017782
+         2016-03-26    0.016019
+         2016-03-27    0.014075
+         2016-03-28    0.019415
+         2016-03-29    0.020789
+         2016-03-30    0.023485
+         2016-03-31    0.022759
+         2016-04-01    0.023226
+         2016-04-02    0.024911
+         2016-04-03    0.024444
+         2016-04-04    0.023407
+         2016-04-05    0.130930
+         2016-04-06    0.234771
+         2016-04-07    0.139898
+         Name: last\_seen, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{registration\PYZus{}year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:} count    38578.000000
+         mean      2005.683602
+         std         86.737015
+         min       1000.000000
+         25\%       2001.000000
+         50\%       2005.000000
+         75\%       2009.000000
+         max       9999.000000
+         Name: registration\_year, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{registration\PYZus{}year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}index}\PY{p}{(}\PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}43}]:} 9999       2
+         9000       1
+         8888       1
+         6200       1
+         5911       1
+         5000       2
+         4500       1
+         4100       1
+         2800       1
+         2019       1
+         2018     398
+         2017    1008
+         2016     645
+         2015     357
+         2014     647
+         2013     790
+         2012    1303
+         2011    1615
+         2010    1580
+         2009    2075
+         2008    2202
+         2007    2258
+         2006    2651
+         2005    2785
+         2004    2607
+         2003    2477
+         2002    2135
+         2001    2064
+         2000    2000
+         1999    1724
+                 {\ldots} 
+         1967      25
+         1966      21
+         1965      17
+         1964       9
+         1963       7
+         1962       4
+         1961       6
+         1960      17
+         1959       6
+         1958       3
+         1957       2
+         1956       4
+         1955       1
+         1954       2
+         1953       1
+         1952       1
+         1951       1
+         1950       1
+         1948       1
+         1943       1
+         1941       2
+         1939       1
+         1938       1
+         1937       4
+         1934       2
+         1931       1
+         1929       1
+         1927       1
+         1001       1
+         1000       1
+         Name: registration\_year, Length: 91, dtype: int64
+\end{Verbatim}
+            
+    The \texttt{registration\_year} represents the year that the vehicle
+were first registered, given a good approximation of how old the vehicle
+is. We can see there are outliers with some vehicles having a
+registration year in the 1000's or above 2016( the year the dataset was
+created). We will remove these values with a boolean filter to unskew
+the data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{registration\PYZus{}filter} \PY{o}{=} \PY{p}{(}\PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{registration\PYZus{}year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1900}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{registration\PYZus{}year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{2016}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{autos} \PY{o}{=} \PY{n}{autos}\PY{p}{[}\PY{n}{registration\PYZus{}filter}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{registration\PYZus{}year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}46}]:} count    37158.000000
+         mean      2003.970747
+         std          6.998597
+         min       1927.000000
+         25\%       2001.000000
+         50\%       2005.000000
+         75\%       2008.000000
+         max       2016.000000
+         Name: registration\_year, dtype: float64
+\end{Verbatim}
+            
+    With a clean dataset we have the following information for the
+\texttt{registration\_year} column:
+
+    \begin{itemize}
+\tightlist
+\item
+  Average age of the cars sold is 13 years.
+\end{itemize}
+
+    \begin{itemize}
+\tightlist
+\item
+  75\% of cars sold are 8 years old.
+\end{itemize}
+
+    \begin{itemize}
+\tightlist
+\item
+  50\% of cars sold are 11 years old.
+\end{itemize}
+
+    \section{Exploring Price by Brand}\label{exploring-price-by-brand}
+
+    When working with data on cars, its important to explore variations
+across different brans. We will use aggregation to understand the brand
+column.
+
+    \subsubsection{Top 20 Brands}\label{top-20-brands}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{brand}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{20}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}47}]:} volkswagen        7843
+         bmw               4661
+         mercedes\_benz     4148
+         audi              3630
+         opel              3314
+         ford              2183
+         renault           1386
+         peugeot           1038
+         fiat               784
+         skoda              709
+         seat               643
+         smart              618
+         toyota             544
+         mazda              530
+         citroen            517
+         nissan             507
+         mini               405
+         hyundai            400
+         sonstige\_autos     384
+         volvo              334
+         Name: brand, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{brand}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{20}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Top 20 Brands}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ylim} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{9000}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}48}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x11a44c320>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_92_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The above chart shows the top 20 brands with the top 3 being Volkswagen,
+BMW, and Mercedes Benz. To further analyze the data we will aggregate
+across the top 20 brands to find the average price data and compare:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{mean\PYZus{}price} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         \PY{n}{brands} \PY{o}{=} \PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{brand}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{20}\PY{p}{]}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{k}{for} \PY{n}{brand} \PY{o+ow}{in} \PY{n}{brands}\PY{p}{:}
+             \PY{n}{brand\PYZus{}group} \PY{o}{=} \PY{n}{autos}\PY{p}{[}\PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{brand}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{brand}\PY{p}{]}
+             \PY{n}{mean\PYZus{}price\PYZus{}brand} \PY{o}{=} \PY{n}{brand\PYZus{}group}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+             \PY{n}{mean\PYZus{}price}\PY{p}{[}\PY{n}{brand}\PY{p}{]} \PY{o}{=} \PY{n}{mean\PYZus{}price\PYZus{}brand}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n}{mean\PYZus{}price}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}51}]:} \{'volkswagen': 6645.13260232054,
+          'bmw': 8975.103840377602,
+          'mercedes\_benz': 9174.193828351012,
+          'audi': 10276.903581267217,
+          'opel': 4219.954737477368,
+          'ford': 5274.369216674301,
+          'renault': 3526.433621933622,
+          'peugeot': 3955.169556840077,
+          'fiat': 4008.174744897959,
+          'skoda': 6836.696755994359,
+          'seat': 5638.640746500778,
+          'smart': 3780.4692556634304,
+          'toyota': 5573.57169117647,
+          'mazda': 5309.526415094339,
+          'citroen': 4614.970986460348,
+          'nissan': 6428.428007889546,
+          'mini': 10715.237037037037,
+          'hyundai': 6181.8725,
+          'sonstige\_autos': 12381.307291666666,
+          'volvo': 6151.583832335329\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{mean\PYZus{}price\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{o}{.}\PY{n}{from\PYZus{}dict}\PY{p}{(}\PY{n}{mean\PYZus{}price}\PY{p}{,} \PY{n}{orient} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{n}{mean\PYZus{}price\PYZus{}df}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Price Top 20 Brands}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}53}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x11a5d86a0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_98_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We can see that of the top 5 brands of cars sold Audi has the highest
+average sale price around 1,100 followed by Mercedes Benz with an
+average sale price of 9,000. This is important information when combined
+with the target purchase price we estimated earlier. We can use this
+data to place a higher priority on Audi, Mercedes Benz, and BMW vehicles
+with a price in the low target range estimated before.
+
+    \section{Exploring Average Mileage by
+Brand}\label{exploring-average-mileage-by-brand}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{mean\PYZus{}odometer\PYZus{}km} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         
+         \PY{k}{for} \PY{n}{brand} \PY{o+ow}{in} \PY{n}{brands}\PY{p}{:}
+             \PY{n}{brand\PYZus{}group} \PY{o}{=} \PY{n}{autos}\PY{p}{[}\PY{n}{autos}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{brand}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{brand}\PY{p}{]}
+             \PY{n}{mean\PYZus{}odometer\PYZus{}brand} \PY{o}{=} \PY{n}{brand\PYZus{}group}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{odometer\PYZus{}km}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+             \PY{n}{mean\PYZus{}odometer\PYZus{}km}\PY{p}{[}\PY{n}{brand}\PY{p}{]} \PY{o}{=} \PY{n}{mean\PYZus{}odometer\PYZus{}brand}
+             
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{n}{mean\PYZus{}odometer\PYZus{}km}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}55}]:} \{'volkswagen': 125765.65089889073,
+          'bmw': 132068.2257026389,
+          'mercedes\_benz': 130139.82642237222,
+          'audi': 127524.79338842975,
+          'opel': 123952.92697646348,
+          'ford': 119651.85524507558,
+          'renault': 121489.898989899,
+          'peugeot': 122341.04046242774,
+          'fiat': 107901.78571428571,
+          'skoda': 110063.46967559944,
+          'seat': 116104.19906687403,
+          'smart': 97775.08090614887,
+          'toyota': 113740.80882352941,
+          'mazda': 119981.1320754717,
+          'citroen': 114245.64796905222,
+          'nissan': 110335.3057199211,
+          'mini': 88679.01234567902,
+          'hyundai': 101862.5,
+          'sonstige\_autos': 90533.85416666667,
+          'volvo': 137230.53892215568\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{mean\PYZus{}odometer\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{o}{.}\PY{n}{from\PYZus{}dict}\PY{p}{(}\PY{n}{mean\PYZus{}odometer\PYZus{}km}\PY{p}{,} \PY{n}{orient} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{mean\PYZus{}odometer\PYZus{}df}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Mileage Top 20 Brands}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}57}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x11a58c240>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_104_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We can see that the top five brands sold all have a high average
+odometer reading with an average odometer reading over 120,000
+kilometers or 75,000 miles. Odometer reading does not seem to have a
+large effect on the sales price of the vehicle with many of the top
+vehicle having similar average odometer readings but selling for
+different prices.
+
+    \section{Conclusions}\label{conclusions}
+
+    In this project, we analyzed data about used cars that were sold on the
+Ebay-Kleinanzeigan website with the goal of helping a team of buyers to
+make informed decisions while purchasing sales merchandise.
+
+    We concluded that the top five brands sold during the month of march
+2016 were Volkswagen, BMW, Mercedes\_Benz, Audi, and Opel. Of these five
+brands Audi, Mercedes\_Benz and BMW sold for highest average sales
+price. We estimated target purchasing value of merchandise should be
+between 2,000 and 6,000 with a low estimated profit margin of about
+2,000.
+
+    Some important things to keep in mind. This data was collected over
+short time period of one month and is limited in scope. We might gain
+increased confidence in our purchasing projections by scraping further
+datasets that span a longer time period.
+
+    Future analysis on this dataset could be done by: * Finding the most
+common brand/model combinations * Aggregating damage vs non-damage data
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
