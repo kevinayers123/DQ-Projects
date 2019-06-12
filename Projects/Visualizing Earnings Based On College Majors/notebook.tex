@@ -1,0 +1,1302 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Visualizing Earnings Based On College Majors}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    For this project we'll be using pandas plotting functionality along with
+Jupyter notebook interface to explore data quickly through
+visualizations.
+
+The goal is to demonstrate data visualization techniques by analyzing
+job success outcomes of students who graduated from college between 2010
+and 2012. The original data of on the job outcomes was released by
+\href{https://www.census.gov/programs-surveys/acs/}{American Community
+Survey}, which conducts surveys and aggregates the data. The website
+FiveThirtyEight cleaned the dataset and released it on their
+\href{https://github.com/fivethirtyeight/data/tree/master/college-majors}{GitHub
+repo}.
+
+Each row in the dataset represents a different major in college and
+contains information on gender diversity, employment rates, median,
+salaries, and more. Below lists some information provided in the data
+dictionary:
+
+    \begin{itemize}
+\tightlist
+\item
+  \texttt{Rank} - Rank by median earnings (the dataset is ordered by
+  this column)
+\item
+  \texttt{Major\_code} - Major code
+\item
+  \texttt{Major} - Major description
+\item
+  \texttt{Major\_categor} - Category of major
+\item
+  \texttt{Total} - Total number of people with major
+\item
+  \texttt{Sample\_size} - Sample size (unweighted) of full-time
+\item
+  \texttt{Men} - Male graduates
+\item
+  \texttt{Women} - Female graduates
+\item
+  \texttt{ShareWomen} - Women as share of total
+\item
+  \texttt{Employed} - Number employed
+\item
+  \texttt{Median} - Median salary of full-time, year-round workers.
+\item
+  \texttt{Low\_wage\_jobs} - Number in low-wage service jobs
+\item
+  \texttt{Full\_time} - Number employed 35 hours or more
+\item
+  \texttt{Part\_time} - Number employed less than 35 hours
+\end{itemize}
+
+    Using visualizations, we will explore the following questions from the
+dataset:
+
+    \begin{itemize}
+\tightlist
+\item
+  Do students in more popular majors make more money?
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Using scatter plots
+  \end{itemize}
+\item
+  How many majors are predominantly male? Predominantly female?
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Using histograms
+  \end{itemize}
+\item
+  Which category of majors have the most students?
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Using bar plots
+  \end{itemize}
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{o}{\PYZpc{}} \PY{n}{matplotlib} \PY{n}{inline}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{recent\PYZus{}grads} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{recent\PYZhy{}grads.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \section{Initial Dataset Exploration}\label{initial-dataset-exploration}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{display}\PY{p}{(}\PY{n}{recent\PYZus{}grads}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+Rank                                        1
+Major_code                               2419
+Major                   PETROLEUM ENGINEERING
+Total                                    2339
+Men                                      2057
+Women                                     282
+Major_category                    Engineering
+ShareWomen                           0.120564
+Sample_size                                36
+Employed                                 1976
+Full_time                                1849
+Part_time                                 270
+Full_time_year_round                     1207
+Unemployed                                 37
+Unemployment_rate                   0.0183805
+Median                                 110000
+P25th                                   95000
+P75th                                  125000
+College_jobs                             1534
+Non_college_jobs                          364
+Low_wage_jobs                             193
+Name: 0, dtype: object
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{display}\PY{p}{(}\PY{n}{recent\PYZus{}grads}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+   Rank  Major_code                                      Major    Total  \
+0     1        2419                      PETROLEUM ENGINEERING   2339.0   
+1     2        2416             MINING AND MINERAL ENGINEERING    756.0   
+2     3        2415                  METALLURGICAL ENGINEERING    856.0   
+3     4        2417  NAVAL ARCHITECTURE AND MARINE ENGINEERING   1258.0   
+4     5        2405                       CHEMICAL ENGINEERING  32260.0   
+
+       Men    Women Major_category  ShareWomen  Sample_size  Employed  \
+0   2057.0    282.0    Engineering    0.120564           36      1976   
+1    679.0     77.0    Engineering    0.101852            7       640   
+2    725.0    131.0    Engineering    0.153037            3       648   
+3   1123.0    135.0    Engineering    0.107313           16       758   
+4  21239.0  11021.0    Engineering    0.341631          289     25694   
+
+       ...        Part_time  Full_time_year_round  Unemployed  \
+0      ...              270                  1207          37   
+1      ...              170                   388          85   
+2      ...              133                   340          16   
+3      ...              150                   692          40   
+4      ...             5180                 16697        1672   
+
+   Unemployment_rate  Median  P25th   P75th  College_jobs  Non_college_jobs  \
+0           0.018381  110000  95000  125000          1534               364   
+1           0.117241   75000  55000   90000           350               257   
+2           0.024096   73000  50000  105000           456               176   
+3           0.050125   70000  43000   80000           529               102   
+4           0.061098   65000  50000   75000         18314              4440   
+
+   Low_wage_jobs  
+0            193  
+1             50  
+2              0  
+3              0  
+4            972  
+
+[5 rows x 21 columns]
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{display}\PY{p}{(}\PY{n}{recent\PYZus{}grads}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+     Rank  Major_code                   Major   Total     Men   Women  \
+168   169        3609                 ZOOLOGY  8409.0  3050.0  5359.0   
+169   170        5201  EDUCATIONAL PSYCHOLOGY  2854.0   522.0  2332.0   
+170   171        5202     CLINICAL PSYCHOLOGY  2838.0   568.0  2270.0   
+171   172        5203   COUNSELING PSYCHOLOGY  4626.0   931.0  3695.0   
+172   173        3501         LIBRARY SCIENCE  1098.0   134.0   964.0   
+
+               Major_category  ShareWomen  Sample_size  Employed  \
+168    Biology & Life Science    0.637293           47      6259   
+169  Psychology & Social Work    0.817099            7      2125   
+170  Psychology & Social Work    0.799859           13      2101   
+171  Psychology & Social Work    0.798746           21      3777   
+172                 Education    0.877960            2       742   
+
+         ...        Part_time  Full_time_year_round  Unemployed  \
+168      ...             2190                  3602         304   
+169      ...              572                  1211         148   
+170      ...              648                  1293         368   
+171      ...              965                  2738         214   
+172      ...              237                   410          87   
+
+     Unemployment_rate  Median  P25th  P75th  College_jobs  Non_college_jobs  \
+168           0.046320   26000  20000  39000          2771              2947   
+169           0.065112   25000  24000  34000          1488               615   
+170           0.149048   25000  25000  40000           986               870   
+171           0.053621   23400  19200  26000          2403              1245   
+172           0.104946   22000  20000  22000           288               338   
+
+     Low_wage_jobs  
+168            743  
+169             82  
+170            622  
+171            308  
+172            192  
+
+[5 rows x 21 columns]
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{recent\PYZus{}grads}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:}              Rank   Major\_code          Total            Men          Women  \textbackslash{}
+        count  173.000000   173.000000     172.000000     172.000000     172.000000   
+        mean    87.000000  3879.815029   39370.081395   16723.406977   22646.674419   
+        std     50.084928  1687.753140   63483.491009   28122.433474   41057.330740   
+        min      1.000000  1100.000000     124.000000     119.000000       0.000000   
+        25\%     44.000000  2403.000000    4549.750000    2177.500000    1778.250000   
+        50\%     87.000000  3608.000000   15104.000000    5434.000000    8386.500000   
+        75\%    130.000000  5503.000000   38909.750000   14631.000000   22553.750000   
+        max    173.000000  6403.000000  393735.000000  173809.000000  307087.000000   
+        
+               ShareWomen  Sample\_size       Employed      Full\_time      Part\_time  \textbackslash{}
+        count  172.000000   173.000000     173.000000     173.000000     173.000000   
+        mean     0.522223   356.080925   31192.763006   26029.306358    8832.398844   
+        std      0.231205   618.361022   50675.002241   42869.655092   14648.179473   
+        min      0.000000     2.000000       0.000000     111.000000       0.000000   
+        25\%      0.336026    39.000000    3608.000000    3154.000000    1030.000000   
+        50\%      0.534024   130.000000   11797.000000   10048.000000    3299.000000   
+        75\%      0.703299   338.000000   31433.000000   25147.000000    9948.000000   
+        max      0.968954  4212.000000  307933.000000  251540.000000  115172.000000   
+        
+               Full\_time\_year\_round    Unemployed  Unemployment\_rate         Median  \textbackslash{}
+        count            173.000000    173.000000         173.000000     173.000000   
+        mean           19694.427746   2416.329480           0.068191   40151.445087   
+        std            33160.941514   4112.803148           0.030331   11470.181802   
+        min              111.000000      0.000000           0.000000   22000.000000   
+        25\%             2453.000000    304.000000           0.050306   33000.000000   
+        50\%             7413.000000    893.000000           0.067961   36000.000000   
+        75\%            16891.000000   2393.000000           0.087557   45000.000000   
+        max           199897.000000  28169.000000           0.177226  110000.000000   
+        
+                      P25th          P75th   College\_jobs  Non\_college\_jobs  \textbackslash{}
+        count    173.000000     173.000000     173.000000        173.000000   
+        mean   29501.445087   51494.219653   12322.635838      13284.497110   
+        std     9166.005235   14906.279740   21299.868863      23789.655363   
+        min    18500.000000   22000.000000       0.000000          0.000000   
+        25\%    24000.000000   42000.000000    1675.000000       1591.000000   
+        50\%    27000.000000   47000.000000    4390.000000       4595.000000   
+        75\%    33000.000000   60000.000000   14444.000000      11783.000000   
+        max    95000.000000  125000.000000  151643.000000     148395.000000   
+        
+               Low\_wage\_jobs  
+        count     173.000000  
+        mean     3859.017341  
+        std      6944.998579  
+        min         0.000000  
+        25\%       340.000000  
+        50\%      1231.000000  
+        75\%      3466.000000  
+        max     48207.000000  
+\end{Verbatim}
+            
+    \subsubsection{Dropping Missing Values}\label{dropping-missing-values}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{raw\PYZus{}data\PYZus{}count} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{recent\PYZus{}grads}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{raw\PYZus{}data\PYZus{}count}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+173
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{recent\PYZus{}grads} \PY{o}{=} \PY{n}{recent\PYZus{}grads}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}
+        \PY{n}{cleaned\PYZus{}data\PYZus{}count} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{recent\PYZus{}grads}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{cleaned\PYZus{}data\PYZus{}count}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+172
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  Only one row contained missing values
+\end{itemize}
+
+    \section{Exploring Differences Between Majors: Scatter
+Plots}\label{exploring-differences-between-majors-scatter-plots}
+
+    Questions: * Do students in more popular majors make more money? * Do
+students that majored in subjects that were majority female make more
+money? * Is there a link between the number of full-time employees and
+median salary?
+
+    \subsubsection{Popular Majors}\label{popular-majors}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{recent\PYZus{}grads}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Median}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scatter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Median(Salary) vs Total(\PYZsh{} of graduates)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1181d4470>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The above scatter plot shows that there is not a strong correlation
+between popularity of a major and median salary of full time workers. A
+surprising data point actually shows that the most popular major has a
+median salary of full time workers that is in the low end around 36,000.
+We should keep in mind that this dataset was collected from 2010 to 2012
+and salaries reflected may be slightly higher if the dataset were
+collected today. Lets take a closer look at the top five majors and the
+median salaries associated with them.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{top\PYZus{}5\PYZus{}majors}\PY{o}{=} \PY{n}{recent\PYZus{}grads}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{top\PYZus{}5\PYZus{}majors}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:}      Rank  Major\_code                                   Major     Total  \textbackslash{}
+         145   146        5200                              PSYCHOLOGY  393735.0   
+         76     77        6203  BUSINESS MANAGEMENT AND ADMINISTRATION  329927.0   
+         123   124        3600                                 BIOLOGY  280709.0   
+         57     58        6200                        GENERAL BUSINESS  234590.0   
+         93     94        1901                          COMMUNICATIONS  213996.0   
+         
+                   Men     Women               Major\_category  ShareWomen  Sample\_size  \textbackslash{}
+         145   86648.0  307087.0     Psychology \& Social Work    0.779933         2584   
+         76   173809.0  156118.0                     Business    0.473190         4212   
+         123  111762.0  168947.0       Biology \& Life Science    0.601858         1370   
+         57   132238.0  102352.0                     Business    0.436302         2380   
+         93    70619.0  143377.0  Communications \& Journalism    0.669999         2394   
+         
+              Employed      {\ldots}        Part\_time  Full\_time\_year\_round  Unemployed  \textbackslash{}
+         145    307933      {\ldots}           115172                174438       28169   
+         76     276234      {\ldots}            50357                199897       21502   
+         123    182295      {\ldots}            72371                100336       13874   
+         57     190183      {\ldots}            36241                138299       14946   
+         93     179633      {\ldots}            49889                116251       14602   
+         
+              Unemployment\_rate  Median  P25th  P75th  College\_jobs  Non\_college\_jobs  \textbackslash{}
+         145           0.083811   31500  24000  41000        125148            141860   
+         76            0.072218   38000  29000  50000         36720            148395   
+         123           0.070725   33400  24000  45000         88232             81109   
+         57            0.072861   40000  30000  55000         29334            100831   
+         93            0.075177   35000  27000  45000         40763             97964   
+         
+              Low\_wage\_jobs  
+         145          48207  
+         76           32395  
+         123          28339  
+         57           27320  
+         93           27440  
+         
+         [5 rows x 21 columns]
+\end{Verbatim}
+            
+    We can see from the above DataFrame the top five majors and the salaries
+associated with full time workers are: * \texttt{Psychology} : 31,500 *
+\texttt{Business\ Admin}: 38,000 * \texttt{Biology}: 33,400 *
+\texttt{Business}: 40,000 * \texttt{Communications}: 35,000
+
+    The average salary of the top 5 majors is \texttt{35,590}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{avg\PYZus{}salary\PYZus{}top\PYZus{}5} \PY{o}{=} \PY{n}{top\PYZus{}5\PYZus{}majors}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Median}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{avg\PYZus{}salary\PYZus{}top\PYZus{}5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+35580.0
+
+    \end{Verbatim}
+
+    We'll compare this with the bottom 5 least popular majors below:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{bottom\PYZus{}5\PYZus{}majors} \PY{o}{=} \PY{n}{recent\PYZus{}grads}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+         \PY{n}{display}\PY{p}{(}\PY{n}{bottom\PYZus{}5\PYZus{}majors}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+     Rank  Major_code                                   Major  Total    Men  \
+73     74        3801                   MILITARY TECHNOLOGIES  124.0  124.0   
+52     53        4005        MATHEMATICS AND COMPUTER SCIENCE  609.0  500.0   
+112   113        1106                            SOIL SCIENCE  685.0  476.0   
+33     34        2411  GEOLOGICAL AND GEOPHYSICAL ENGINEERING  720.0  488.0   
+1       2        2416          MINING AND MINERAL ENGINEERING  756.0  679.0   
+
+     Women                       Major_category  ShareWomen  Sample_size  \
+73     0.0  Industrial Arts & Consumer Services    0.000000            4   
+52   109.0              Computers & Mathematics    0.178982            7   
+112  209.0      Agriculture & Natural Resources    0.305109            4   
+33   232.0                          Engineering    0.322222            5   
+1     77.0                          Engineering    0.101852            7   
+
+     Employed      ...        Part_time  Full_time_year_round  Unemployed  \
+73          0      ...                0                   111           0   
+52        559      ...                0                   391           0   
+112       613      ...              185                   383           0   
+33        604      ...              126                   396          49   
+1         640      ...              170                   388          85   
+
+     Unemployment_rate  Median  P25th  P75th  College_jobs  Non_college_jobs  \
+73            0.000000   40000  40000  40000             0                 0   
+52            0.000000   42000  30000  78000           452                67   
+112           0.000000   35000  18500  44000           355               144   
+33            0.075038   50000  42800  57000           501                50   
+1             0.117241   75000  55000  90000           350               257   
+
+     Low_wage_jobs  
+73               0  
+52              25  
+112              0  
+33              49  
+1               50  
+
+[5 rows x 21 columns]
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{recent\PYZus{}grads}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sample\PYZus{}size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unemployment\PYZus{}rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scatter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Unemployment Rate vs Sample Size}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1184ecda0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The 5 least popular college majors and the salaries associated with them
+are: * \texttt{Military\ Technologies}: 40,000 *
+\texttt{Mathematics\ and\ Computer\ Science}: 78,000 *
+\texttt{Soil\ Science}: 35000 *
+\texttt{Geological\ and\ Geophysical\ Engineering}: 50,000 *
+\texttt{Mining\ and\ Mineral\ Engineering}: 90,000
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{avg\PYZus{}salary\PYZus{}bottom\PYZus{}5} \PY{o}{=} \PY{n}{bottom\PYZus{}5\PYZus{}majors}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Median}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{avg\PYZus{}salary\PYZus{}bottom\PYZus{}5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+48400.0
+
+    \end{Verbatim}
+
+    \subsubsection{Bar Charts: Popular/Unpopular
+Majors}\label{bar-charts-popularunpopular-majors}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{top\PYZus{}5\PYZus{}majors}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Major}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ShareWomen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{legend}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{bottom\PYZus{}5\PYZus{}majors}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Major}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ShareWomen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{legend}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x118a31278>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{top\PYZus{}5\PYZus{}majors}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Major}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Median}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{legend}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{bottom\PYZus{}5\PYZus{}majors}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Major}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Median}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{legend}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1189fac50>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The average salary of the 5 least popular majors is \texttt{48,400},
+about 13,000 more than the top 5 most popular majors. This could mean
+that there is more competition in the employment marketplace for these
+employees as a result of fewer graduates. These majors could also
+include skills that are difficult to master making them valuable as well
+as resulting in less graduates.
+
+    \subsubsection{Note Majors With Highest Salaries(Just for
+fun)}\label{note-majors-with-highest-salariesjust-for-fun}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{Highest\PYZus{}salary} \PY{o}{=} \PY{n}{recent\PYZus{}grads}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Median}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{Highest\PYZus{}salary}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:}     Rank  Major\_code                                      Major    Total  \textbackslash{}
+         0      1        2419                      PETROLEUM ENGINEERING   2339.0   
+         1      2        2416             MINING AND MINERAL ENGINEERING    756.0   
+         2      3        2415                  METALLURGICAL ENGINEERING    856.0   
+         3      4        2417  NAVAL ARCHITECTURE AND MARINE ENGINEERING   1258.0   
+         4      5        2405                       CHEMICAL ENGINEERING  32260.0   
+         5      6        2418                        NUCLEAR ENGINEERING   2573.0   
+         6      7        6202                          ACTUARIAL SCIENCE   3777.0   
+         7      8        5001                 ASTRONOMY AND ASTROPHYSICS   1792.0   
+         10    11        2407                       COMPUTER ENGINEERING  41542.0   
+         13    14        5008                          MATERIALS SCIENCE   4279.0   
+         12    13        2404                     BIOMEDICAL ENGINEERING  14955.0   
+         9     10        2408                     ELECTRICAL ENGINEERING  81527.0   
+         8      9        2414                     MECHANICAL ENGINEERING  91227.0   
+         11    12        2401                      AEROSPACE ENGINEERING  15058.0   
+         14    15        2409  ENGINEERING MECHANICS PHYSICS AND SCIENCE   4321.0   
+         15    16        2402                     BIOLOGICAL ENGINEERING   8925.0   
+         16    17        2412   INDUSTRIAL AND MANUFACTURING ENGINEERING  18968.0   
+         17    18        2400                        GENERAL ENGINEERING  61152.0   
+         18    19        2403                  ARCHITECTURAL ENGINEERING   2825.0   
+         19    20        3201                            COURT REPORTING   1148.0   
+         
+                 Men    Women       Major\_category  ShareWomen  Sample\_size  Employed  \textbackslash{}
+         0    2057.0    282.0          Engineering    0.120564           36      1976   
+         1     679.0     77.0          Engineering    0.101852            7       640   
+         2     725.0    131.0          Engineering    0.153037            3       648   
+         3    1123.0    135.0          Engineering    0.107313           16       758   
+         4   21239.0  11021.0          Engineering    0.341631          289     25694   
+         5    2200.0    373.0          Engineering    0.144967           17      1857   
+         6    2110.0   1667.0             Business    0.441356           51      2912   
+         7     832.0    960.0    Physical Sciences    0.535714           10      1526   
+         10  33258.0   8284.0          Engineering    0.199413          399     32506   
+         13   2949.0   1330.0          Engineering    0.310820           22      3307   
+         12   8407.0   6548.0          Engineering    0.437847           79     10047   
+         9   65511.0  16016.0          Engineering    0.196450          631     61928   
+         8   80320.0  10907.0          Engineering    0.119559         1029     76442   
+         11  12953.0   2105.0          Engineering    0.139793          147     11391   
+         14   3526.0    795.0          Engineering    0.183985           30      3608   
+         15   6062.0   2863.0          Engineering    0.320784           55      6170   
+         16  12453.0   6515.0          Engineering    0.343473          183     15604   
+         17  45683.0  15469.0          Engineering    0.252960          425     44931   
+         18   1835.0    990.0          Engineering    0.350442           26      2575   
+         19    877.0    271.0  Law \& Public Policy    0.236063           14       930   
+         
+                 {\ldots}        Part\_time  Full\_time\_year\_round  Unemployed  \textbackslash{}
+         0       {\ldots}              270                  1207          37   
+         1       {\ldots}              170                   388          85   
+         2       {\ldots}              133                   340          16   
+         3       {\ldots}              150                   692          40   
+         4       {\ldots}             5180                 16697        1672   
+         5       {\ldots}              264                  1449         400   
+         6       {\ldots}              296                  2482         308   
+         7       {\ldots}              553                   827          33   
+         10      {\ldots}             5146                 23621        2275   
+         13      {\ldots}              878                  1967          78   
+         12      {\ldots}             2694                  5986        1019   
+         9       {\ldots}            12695                 41413        3895   
+         8       {\ldots}            13101                 54639        4650   
+         11      {\ldots}             2724                  8790         794   
+         14      {\ldots}              811                  2004          23   
+         15      {\ldots}             1983                  3413         589   
+         16      {\ldots}             2243                 11326         699   
+         17      {\ldots}             7199                 33540        2859   
+         18      {\ldots}              343                  1848         170   
+         19      {\ldots}              223                   808          11   
+         
+             Unemployment\_rate  Median  P25th   P75th  College\_jobs  Non\_college\_jobs  \textbackslash{}
+         0            0.018381  110000  95000  125000          1534               364   
+         1            0.117241   75000  55000   90000           350               257   
+         2            0.024096   73000  50000  105000           456               176   
+         3            0.050125   70000  43000   80000           529               102   
+         4            0.061098   65000  50000   75000         18314              4440   
+         5            0.177226   65000  50000  102000          1142               657   
+         6            0.095652   62000  53000   72000          1768               314   
+         7            0.021167   62000  31500  109000           972               500   
+         10           0.065409   60000  45000   75000         23694              5721   
+         13           0.023043   60000  39000   65000          2626               391   
+         12           0.092084   60000  36000   70000          6439              2471   
+         9            0.059174   60000  45000   72000         45829             10874   
+         8            0.057342   60000  48000   70000         52844             16384   
+         11           0.065162   60000  42000   70000          8184              2425   
+         14           0.006334   58000  25000   74000          2439               947   
+         15           0.087143   57100  40000   76000          3603              1595   
+         16           0.042876   57000  37900   67000          8306              3235   
+         17           0.059824   56000  36000   69000         26898             11734   
+         18           0.061931   54000  38000   65000          1665               649   
+         19           0.011690   54000  50000   54000           402               528   
+         
+             Low\_wage\_jobs  
+         0             193  
+         1              50  
+         2               0  
+         3               0  
+         4             972  
+         5             244  
+         6             259  
+         7             220  
+         10            980  
+         13             81  
+         12            789  
+         9            3170  
+         8            3253  
+         11            372  
+         14            263  
+         15            524  
+         16            640  
+         17           3192  
+         18            137  
+         19            144  
+         
+         [20 rows x 21 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{avg\PYZus{}salary\PYZus{}bottom\PYZus{}5} \PY{o}{=} \PY{n}{bottom\PYZus{}5\PYZus{}majors}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Median}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{avg\PYZus{}salary\PYZus{}bottom\PYZus{}5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+48400.0
+
+    \end{Verbatim}
+
+    \subsubsection{Majority Female Majors}\label{majority-female-majors}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{recent\PYZus{}grads}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ShareWomen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unemployment\PYZus{}rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scatter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Share of Women vs Unemployment Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x118842b38>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  No correlation between share of woman and unemployment rate
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{recent\PYZus{}grads}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Men}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Median}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scatter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Men(\PYZsh{} of male graduates) vs Median(Avg Salary )}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x118ba56d8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{recent\PYZus{}grads}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Women}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Median}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scatter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Women(\PYZsh{} of female graduates) vs Median(Avg Salary)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1185707f0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{recent\PYZus{}grads}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ShareWomen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Median}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{kind} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scatter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Share of Women vs Average Salary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x118820198>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We can see from the above chart that as the number of women in a college
+major increases the average salary of full time workers seems to
+decrease. This could mean the women are choosing majors that aren't as
+sought after by employers. Lets look at the top 10 majors with the
+biggest share of women:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{top10\PYZus{}women} \PY{o}{=} \PY{n}{recent\PYZus{}grads}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ShareWomen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{display}\PY{p}{(}\PY{n}{top10\PYZus{}women}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+     Rank  Major_code                                          Major  \
+164   165        2307                      EARLY CHILDHOOD EDUCATION   
+163   164        6102  COMMUNICATION DISORDERS SCIENCES AND SERVICES   
+51     52        6104                     MEDICAL ASSISTING SERVICES   
+138   139        2304                           ELEMENTARY EDUCATION   
+150   151        2901                   FAMILY AND CONSUMER SCIENCES   
+100   101        2310                        SPECIAL NEEDS EDUCATION   
+156   157        5403      HUMAN SERVICES AND COMMUNITY ORGANIZATION   
+151   152        5404                                    SOCIAL WORK   
+34     35        6107                                        NURSING   
+88     89        6199       MISCELLANEOUS HEALTH MEDICAL PROFESSIONS   
+
+        Total      Men     Women                       Major_category  \
+164   37589.0   1167.0   36422.0                            Education   
+163   38279.0   1225.0   37054.0                               Health   
+51    11123.0    803.0   10320.0                               Health   
+138  170862.0  13029.0  157833.0                            Education   
+150   58001.0   5166.0   52835.0  Industrial Arts & Consumer Services   
+100   28739.0   2682.0   26057.0                            Education   
+156    9374.0    885.0    8489.0             Psychology & Social Work   
+151   53552.0   5137.0   48415.0             Psychology & Social Work   
+34   209394.0  21773.0  187621.0                               Health   
+88    13386.0   1589.0   11797.0                               Health   
+
+     ShareWomen  Sample_size  Employed      ...        Part_time  \
+164    0.968954          342     32551      ...             7001   
+163    0.967998           95     29763      ...            13862   
+51     0.927807           67      9168      ...             4107   
+138    0.923745         1629    149339      ...            37965   
+150    0.910933          518     46624      ...            15872   
+100    0.906677          246     24639      ...             5153   
+156    0.905590           89      8294      ...             2405   
+151    0.904075          374     45038      ...            13481   
+34     0.896019         2554    180903      ...            40818   
+88     0.881294           81     10076      ...             4145   
+
+     Full_time_year_round  Unemployed  Unemployment_rate  Median  P25th  \
+164                 20748        1360           0.040105   28000  21000   
+163                 14460        1487           0.047584   28000  20000   
+51                   4290         407           0.042507   42000  30000   
+138                 86540        7297           0.046586   32000  23400   
+150                 26906        3355           0.067128   30000  22900   
+100                 16642        1067           0.041508   35000  32000   
+156                  5061         326           0.037819   30000  24000   
+151                 27588        3329           0.068828   30000  25000   
+34                 122817        8497           0.044863   48000  39000   
+88                   5868         893           0.081411   36000  23000   
+
+     P75th  College_jobs  Non_college_jobs  Low_wage_jobs  
+164  35000         23515              7705           2868  
+163  40000         19957              9404           5125  
+51   65000          2091              6948           1270  
+138  38000        108085             36972          11502  
+150  40000         20985             20133           5248  
+100  42000         20185              3797           1179  
+156  35000          2878              4595            724  
+151  35000         27449             14416           4344  
+34   58000        151643             26146           6193  
+88   42000          5652              3835           1422  
+
+[10 rows x 21 columns]
+    \end{verbatim}
+
+    
+    \subsubsection{Full Time Employees vs Median
+Salaries}\label{full-time-employees-vs-median-salaries}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{recent\PYZus{}grads}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Full\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Median}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scatter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{} Full Time Employees vs Average Salary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x118ed8b00>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    There is some correlation between the number of full time employees and
+average salaries. As average salary increases the number of full time
+employees decreases for some majors. There could be number of reason for
+this. Employers may only need a smaller number of highly skilled workers
+that are paid more.
+
+    \section{Exploring Column Distributions:
+Histograms}\label{exploring-column-distributions-histograms}
+
+    \begin{itemize}
+\tightlist
+\item
+  What is the most common median salary range?
+\item
+  What percent of majors are predominantly male? Predominantly female?
+\end{itemize}
+
+    \subsubsection{Common Median Salary
+Range}\label{common-median-salary-range}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{recent\PYZus{}grads}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Median}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n+nb}{range}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{100000}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x11902a2b0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_52_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The above histogram shows that the the most common median salary for
+recent graduates is in the 35,000 to 40,000 range.
+
+    \subsubsection{Male}\label{male}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{recent\PYZus{}grads}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Men}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{,} \PY{n+nb}{range}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{150000}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1191155c0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_55_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Female}\label{female}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{recent\PYZus{}grads}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Women}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{,} \PY{n+nb}{range}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{200000}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x118c9df28>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_57_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Share Female}\label{share-female}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{recent\PYZus{}grads}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ShareWomen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n+nb}{range}\PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x119125ef0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_59_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The above histogram shows that a large percentage of college majors have
+a majority of female students graduating. We will compare plots to gain
+some more insight.
+
+    \section{Scatter Matrix Plot
+Comparison}\label{scatter-matrix-plot-comparison}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{k+kn}{from} \PY{n+nn}{pandas}\PY{n+nn}{.}\PY{n+nn}{plotting} \PY{k}{import} \PY{n}{scatter\PYZus{}matrix}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{scatter\PYZus{}matrix}\PY{p}{(}\PY{n}{recent\PYZus{}grads}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sample\PYZus{}size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Median}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:} array([[<matplotlib.axes.\_subplots.AxesSubplot object at 0x1194a4518>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x119649470>],
+                [<matplotlib.axes.\_subplots.AxesSubplot object at 0x1195b6b00>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x1196d01d0>]],
+               dtype=object)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_63_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{scatter\PYZus{}matrix}\PY{p}{(}\PY{n}{recent\PYZus{}grads}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sample\PYZus{}size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Median}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unemployment\PYZus{}rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:} array([[<matplotlib.axes.\_subplots.AxesSubplot object at 0x11979be80>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x11987c048>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x1198a46d8>],
+                [<matplotlib.axes.\_subplots.AxesSubplot object at 0x1198cdd68>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x1198fe438>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x1198fe470>],
+                [<matplotlib.axes.\_subplots.AxesSubplot object at 0x119958198>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x119980828>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x1199a8c18>]],
+               dtype=object)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_64_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{scatter\PYZus{}matrix}\PY{p}{(}\PY{n}{recent\PYZus{}grads}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ShareWomen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Median}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:} array([[<matplotlib.axes.\_subplots.AxesSubplot object at 0x119d3dbe0>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x119d62978>],
+                [<matplotlib.axes.\_subplots.AxesSubplot object at 0x119f2b048>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x119f526d8>]],
+               dtype=object)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_65_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  Again we can see that as the percentage of woman in major decrease the
+  median salary of full time workers increases.
+\end{itemize}
+
+    \section{Conclusions}\label{conclusions}
+
+    The goal of this project was to demonstrate some of pandas data
+visualization functionality through the analysis of college major data
+collected by American Community Survey and cleaned by the popular
+FiveThirtyEight website. We have demonstrated the use of scatter plots,
+bar charts, histograms, and scatter matrix visualizations.
+
+After analyzing the data we can clearly see the popular majors do not
+have job outcomes that include higher salaries. In fact the most popular
+major psychology has a low starting salary for graduates around 36,000.
+Furthermore woman make woman make up a large percent of the most popular
+majors with some negative correlation of share of women and median
+salary outcomes.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
